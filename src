@@ -1,0 +1,85 @@
+/components
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+const Header = () => {
+  return (
+    <header className="p-4 bg-gray-800">
+      <div className="flex justify-between">
+        <Link to="/" className="text-xl font-bold">Filmorzo Animation</Link>
+        <Link to="/upload" className="text-lg">Upload Video</Link>
+      </div>
+    </header>
+  );
+};
+
+export default Header
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+const VideoCard = ({ video }) => {
+  return (
+    <div className="bg-gray-800 p-4 rounded-md">
+      <h3 className="text-lg font-bold">{video.title}</h3>
+      <p>{video.description}</p>
+      <Link to={`/video/${video.id}`} className="text-blue-500">Watch Now</Link>
+    </div>
+  );
+};
+
+export default VideoCard;
+
+
+import React from "react";
+
+const VideoUploadForm = ({ onSubmit }) => {
+  return (
+    <form onSubmit={onSubmit} className="mt-4">
+      <input type="file" accept="video/*" className="block w-full p-2 mb-4 border border-gray-600" />
+      <input type="text" placeholder="Video Title" className="block w-full p-2 mb-4 border border-gray-600" />
+      <textarea placeholder="Video Description" className="block w-full p-2 mb-4 border border-gray-600"></textarea>
+      <button type="submit" className="bg-blue-500 p-2 rounded">Upload</button>
+    </form>
+  );
+};
+
+export default VideoUploadForm;
+
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import VideoPlayer from "./pages/VideoPlayer";
+import UploadVideo from "./pages/UploadVideo";
+
+function App() {
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      <nav className="p-4 bg-gray-800 flex justify-between">
+        <Link to="/" className="text-xl font-bold">Filmorzo Animation</Link>
+        <Link to="/upload" className="text-lg">Upload Video</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/video/:id" element={<VideoPlayer />} />
+        <Route path="/upload" element={<UploadVideo />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById("root")
+);
