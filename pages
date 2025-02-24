@@ -1,0 +1,73 @@
+import React from "react";
+
+const Home = () => {
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">Welcome to Filmorzo Animation</h1>
+      <p>Explore and upload amazing animations!</p>
+      {/* Display list of videos here */}
+    </div>
+  );
+};
+
+export default Home;
+
+
+
+import React from "react";
+import { useParams } from "react-router-dom";
+
+const VideoPlayer = () => {
+  const { id } = useParams();
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">Watch Animation {id}</h1>
+      <video controls className="w-full">
+        <source src={`path-to-video/${id}.mp4`} type="video/mp4" />
+      </video>
+    </div>
+  );
+};
+
+export default VideoPlayer;
+
+import React, { useState } from "react";
+
+const UploadVideo = () => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add video upload logic here
+  };
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">Upload a Video</h1>
+      <form onSubmit={handleSubmit} className="mt-4">
+        <input 
+          type="file" 
+          accept="video/*" 
+          className="block w-full p-2 mb-4 border border-gray-600" 
+        />
+        <input 
+          type="text" 
+          placeholder="Video Title" 
+          className="block w-full p-2 mb-4 border border-gray-600" 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)} 
+        />
+        <textarea 
+          placeholder="Video Description" 
+          className="block w-full p-2 mb-4 border border-gray-600" 
+          value={description} 
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <button type="submit" className="bg-blue-500 p-2 rounded">Upload</button>
+      </form>
+    </div>
+  );
+};
+
+export default UploadVideo;
